@@ -1,3 +1,4 @@
+
 from flask import Flask, Response, request
 from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
@@ -8,6 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:toor@localhost/agendafecaf'
 
 db = SQLAlchemy(app)
+
 
 class usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,14 +23,11 @@ class usuario(db.Model):
     def aut_response(self, code):
         return {"id": self.id, "nome": self.nome, "code": code}
 
-with app.app_context():
-    db.create_all()
-
 
 
 
 #Selecionar todos os usuarios
-@app.route("/", methods=["GET"])
+@app.route("/", methods=['GET'])
 def getAllUsers():
     getUser = usuario.query.all()
     getUser_json = [usuario.to_json() for usuario in getUser]
