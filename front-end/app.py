@@ -292,29 +292,31 @@ class Application():
     def labelsAndEntry(self):
 
         def id_focus_in(event):
-            if self.ent_professor.get() == "Professor":
+            if self.ent_id.get() == "ID":
                 self.ent_id.delete(0, 'end')
                 self.ent_id.config(fg="Black")
 
         def id_focus_out(event):
             if self.ent_id.get() == "":
-                self.ent_id.insert(0, "Professor")
+                self.ent_id.insert(0, "ID")
 
         def password_focus_in(event):
-            if self.ent_senha.get() == "00/00/00":
+            if self.ent_senha.get() == "Senha":
                 self.ent_senha.delete(0, 'end')
-                self.ent_senha.config(fg="Black")
+                self.ent_senha.config(fg="Black", show="*")
 
         def password_focus_out(event):
             if self.ent_senha.get() == "":
-                self.ent_senha.insert(0, "00/00/00")
+                self.ent_senha.insert(0, "Senha")
+                self.ent_senha.config(show="")
 
 
 
         ## Label ID
-        self.lb_id = Label(self.frame_1, text="ID:")
-        self.lb_id.place(relx=0.00, rely=0.05, relwidth=0.25, relheight=0.15)
-        self.lb_id.grid(row=0, column=0)
+        self.lb_id = Label(self.frame_1, font=("Helvetica", 24, "bold"), fg="Blue", text="FePlani")
+        self.lb_id.place(relx=0.40, rely=0.15)
+
+
 
         ## Entrada do ID
         self.ent_id = Entry(self.frame_1, font=("Helvetica", 13), fg="Gray")
@@ -323,14 +325,6 @@ class Application():
         self.ent_id.bind("<FocusIn>", id_focus_in)
         self.ent_id.bind("<FocusOut>", id_focus_out)
 
-        self.ent_professor = Entry(self.frame_1, font=("Helvetica", 13), fg="Gray")
-
-        self.ent_professor.grid(column=0, row=0, sticky=tk.W, padx=5, pady=5)
-        self.ent_professor.place(relx=0.1, rely=0.15, relwidth=0.2, height=40)
-        self.ent_professor.insert(0, "Professor")
-        self.ent_professor.bind("<FocusIn>", professor_focus_in)
-        self.ent_professor.bind("<FocusOut>", professor_focus_out)
-
 
         ## Label da Senha
         self.lb_senha = Label(self.frame_1)
@@ -338,8 +332,11 @@ class Application():
 
 
         ##Entrada da senha;
-        self.ent_senha = Entry(self.frame_1, show="*")
+        self.ent_senha = Entry(self.frame_1, font=("Helvetica", 13), fg="Gray")
         self.ent_senha.place(relx=0.35, rely=0.5, relwidth=0.25, height=35)
+        self.ent_senha.insert(0, "Senha")
+        self.ent_senha.bind("<FocusIn>", password_focus_in)
+        self.ent_senha.bind("<FocusOut>", password_focus_out)
 
 
 
